@@ -349,7 +349,8 @@ def main():
 
     elif choice == "Deoptimization":
         try:
-            details_1 = st.radio("Get deoptimized DNA sequence.",("By DNA sequence", "By amino acid sequence"), index=None)
+            st.subheader("Get optimized DNA sequence.")
+            details_1 = st.radio(" ",("By DNA sequence", "By amino acid sequence"), index=None)
             if details_1 == "By DNA sequence":
                 st.subheader("Get deoptimize DNA sequence by input DNA sequence.")
                 seq_file = st.file_uploader("Upload FASTA File", type=["fasta", "fa", "txt"])
