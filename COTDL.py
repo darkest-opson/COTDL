@@ -26,16 +26,14 @@ matplotlib.use("Agg")
 
 def main():
     flag = False
-    st.title("CODTL")
+    st.title("CODTL: Codon Optimization and Deoptimization Tool for Legume")
 
     menu = ["Home", "Optimization", "Deoptimization", "Tutorial"]
     choice = st.sidebar.selectbox("Select Activity", menu)
 
     if choice == "Home":
         st.markdown("""
-        Welcome to Legume DNA Optimization tool- CODTL (codon optimization and deoptimization tool for legume), an application designed to help you optimize DNA sequences for high expression of protein/transformation experiment in legumes.
-        With this tool, you can upload your DNA sequences or Amino Acid sequence and apply codon bias optimization techniques to enhance gene expression specifically in legumes. 
-        Whether you're a researcher, biologist, or genetic engineer, this app provides you with the tools you need to design DNA sequences tailored to legumes.
+        Welcome to CODTL, the Legume DNA Optimization Tool. This application enables users to optimize DNA sequences for high protein expression and transformation experiments in legumes. Upload DNA or amino acid sequences and apply codon bias optimization techniques for enhanced gene expression in legumes. Ideal for researchers, biologists, and genetic engineers, CODTL offers the essential tools for designing legume-specific DNA sequences.
         """)
         st.image("rf.jpg", use_column_width=True)
 
