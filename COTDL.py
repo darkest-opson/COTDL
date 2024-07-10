@@ -25,6 +25,16 @@ matplotlib.use("Agg")
 
 
 def main():
+    st.markdown(
+    """
+    <style>
+    body {
+        background-color: #f0f0f0; /* Set your desired background color here */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+    )
     flag = False
     st.title("CODTL: Codon Optimization and Deoptimization Tool for Legume")
 
