@@ -40,7 +40,7 @@ def main():
 
     elif choice == "Optimization":
   
-        st.subheader("Get optimize DNA sequence.")
+        st.subheader("Get optimized DNA sequence.")
 
         if st.checkbox("By DNA sequence"):
             seq_file=st.file_uploader("Upload FASTA File",type=["fasta","fa","txt"])
@@ -349,10 +349,7 @@ def main():
 
     elif choice == "Deoptimization":
         try:
-            st.markdown("""
-            Choose specific amino acid for Deoptimization.
-            """)
-            details_1 = st.radio("Input File is a:", ("By DNA sequence", "By amino acid sequence"), index=None)
+            details_1 = st.radio("Get deoptimized sequence: ", ("By DNA sequence", "By amino acid sequence"), index=None)
             if details_1 == "By DNA sequence":
                 st.subheader("Get deoptimize DNA sequence by input DNA sequence.")
                 seq_file = st.file_uploader("Upload FASTA File", type=["fasta", "fa", "txt"])
