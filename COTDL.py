@@ -29,7 +29,7 @@ def main():
     st.title("CODTL")
 
     menu = ["Home", "Optimization", "Deoptimization", "Tutorial"]
-    choice = st.sidebar.selectbox("Select Activity", menu)
+    choice = st.sidebar.selectbox("Menu", menu)
 
     if choice == "Home":
         st.subheader("Intro to APP")
