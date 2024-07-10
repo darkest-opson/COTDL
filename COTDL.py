@@ -25,18 +25,8 @@ matplotlib.use("Agg")
 
 
 def main():
-    st.markdown(
-    """
-    <style>
-    body {
-        background-color: red; /* Set your desired background color here */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-    )
     flag = False
-    st.title("CODTL: Codon Optimization and Deoptimization Tool for Legume")
+    st.markdown("### CODTL: Codon Optimization and Deoptimization Tool for Legume")
 
     menu = ["Home", "Optimization", "Deoptimization", "Tutorial"]
     choice = st.sidebar.selectbox("Menu", menu)
