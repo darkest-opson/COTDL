@@ -26,7 +26,6 @@ matplotlib.use("Agg")
 
 def main():
     flag = False
-    """This will be the app menu"""
     st.title("CODTL")
 
     menu = ["Home", "Optimization", "Deoptimization", "Tutorial"]
@@ -416,6 +415,34 @@ def main():
                         de_opt,demodify_ori=deoptimized_dna_to_dna_seq(input_dna_seq,selected_amino_acids,selected_host_organism)
                         st.markdown(f"deoptimized sequence: {de_opt}", unsafe_allow_html=True)
 
+                        
+                        melting_temp = calculate_melting_temp(demodify_ori)
+                        gc_content = calculate_gc_content(demodify_ori)
+            
+                        # Create a DataFrame for the Excel file
+                        data = {
+                            "Modified Sequence": [demodify_ori],
+                            "Length": [len(demodify_ori)],
+                            "Melting Temperature": [melting_temp],
+                            "GC Content": [gc_content]
+                        }
+                        df = pd.DataFrame(data)
+            
+                        # Convert DataFrame to Excel
+                        output = BytesIO()
+                        with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
+                            df.to_excel(writer, index=False, sheet_name='Sheet1')
+                        processed_data = output.getvalue()
+
+                        # Provide download link
+                        st.download_button(
+                            label="Download data as Excel",
+                            data=processed_data,
+                            file_name='optimized_dna_sequence.xlsx',
+                            mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                        )
+
+
             elif details_1 == "By amino acid sequence":
                 st.subheader("Get deoptimize DNA sequence by input Amino acid sequence.")
                 seq_file = st.file_uploader("Upload FASTA File", type=["fasta", "fa", "txt"])
@@ -467,10 +494,37 @@ def main():
                     selected_amino_acids = st.multiselect('Choose amino acids to deoptimize:',
                                                         amino_acids,
                                                         format_func=lambda x: f"{x}:{amino_acid_names[x]}")
+                    
 
                     if st.checkbox("Get deoptimize DNA seq for selected amino acid"):
                         de_opt,demodify_ori=deoptimize_sequence_aa(input_aa_seq,selected_amino_acids,selected_host_organism)
                         st.markdown(f"deoptimized sequence: {de_opt}", unsafe_allow_html=True)
+
+                        melting_temp = calculate_melting_temp(demodify_ori)
+                        gc_content = calculate_gc_content(demodify_ori)
+            
+                        # Create a DataFrame for the Excel file
+                        data = {
+                            "Modified Sequence": [demodify_ori],
+                            "Length": [len(demodify_ori)],
+                            "Melting Temperature": [melting_temp],
+                            "GC Content": [gc_content]
+                        }
+                        df = pd.DataFrame(data)
+            
+                        # Convert DataFrame to Excel
+                        output = BytesIO()
+                        with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
+                            df.to_excel(writer, index=False, sheet_name='Sheet1')
+                        processed_data = output.getvalue()
+
+                        # Provide download link
+                        st.download_button(
+                            label="Download data as Excel",
+                            data=processed_data,
+                            file_name='optimized_dna_sequence.xlsx',
+                            mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                        )
         except:
             st.write("Please provide a valid input sequence.")
 
@@ -479,8 +533,62 @@ def main():
 
         
 
+    
     elif choice == "Tutorial":
-        st.subheader("Tutorial")
+        st.subheader("Optimization")
+
+        st.markdown("""
+        ### Step 1: Choose Sequence Type
+        In the optimization section, choose "DNA sequence" if your input file is a DNA sequence, or choose "Amino acid sequence" if your input file contains protein amino acids.
+
+        ### Step 2: Upload Sequence File
+        Upload your sequence file. Ensure your file is correctly formatted to avoid any errors during the optimization process.
+
+        ### Step 3: Select Host Organism
+        Select your desired expression host organism from the dropdown menu. This step is crucial as different organisms have different codon preferences.
+
+        ### Step 4: Optimize Your Sequence
+        Get your optimized DNA by clicking either "Full Optimization" or "Probabilistic Optimization." For probabilistic optimization, you need to choose the Optimality factor (S):
+        - **S = 0**: Signifies full optimization.
+        - **S = 64**: Signifies anti-optimization.
+        - **S = 1**: Codons in the generated sequence are randomly selected.
+
+
+        ### Step 5: Download Optimized Sequence
+        You can download the optimized sequence in Excel format for further analysis and use.
+
+        ### Additional Features
+        - **Check Restriction Sites:** Analyze the restriction sites in both the input and optimized sequences.
+        - **GC Content:** Calculate the GC content of your sequences.
+        - **Transcription and Translation:** Get the transcribed and translated sequence of the optimized DNA.
+        """)
+
+        st.markdown("""
+        ### Deoptimization Tutorial
+
+        #### Step 1: Choose Specific Amino Acid for Deoptimization
+        Select the amino acid(s) you wish to deoptimize.
+
+        #### Step 2: Choose Sequence Type
+        Choose "DNA sequence" if your input file is a DNA sequence, or "Amino acid sequence" if your input file contains protein amino acids.
+
+        #### Step 3: Upload Sequence File
+        Upload your sequence file. Ensure your file is correctly formatted to avoid any errors during the deoptimization process.
+
+        #### Step 4: Select Host Organism
+        Select your desired expression host organism from the dropdown menu. This step is crucial as different organisms have different codon preferences.
+
+        #### Step 5: Choose Amino Acids to Deoptimize
+        Select the amino acids you wish to deoptimize from the list provided.
+
+        #### Step 6: Get Deoptimized Sequence
+        Check the checkbox "Get deoptimized DNA sequence for selected amino acid" to generate the deoptimized sequence.
+
+        #### Step 7: Download Deoptimized Sequence
+        You can download the deoptimized sequence in Excel format for further analysis and use.
+        """)
+
+
 
 if __name__ == "__main__":
     main()
