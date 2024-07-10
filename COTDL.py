@@ -29,7 +29,7 @@ def main():
     """
     <style>
     body {
-        background-color: #f0f0f0; /* Set your desired background color here */
+        background-color: red; /* Set your desired background color here */
     }
     </style>
     """,
