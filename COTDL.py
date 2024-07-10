@@ -26,7 +26,7 @@ matplotlib.use("Agg")
 
 def main():
     flag = False
-    st.subheader("CODTL: Codon Optimization and Deoptimization Tool for Legume")
+    st.markdown("### CODTL: Codon Optimization and Deoptimization Tool for Legume")
 
     menu = ["Home", "Optimization", "Deoptimization", "Tutorial"]
     choice = st.sidebar.selectbox("Select Activity", menu)
