@@ -1,49 +1,14 @@
-# codon_bias = {
-#     'A': 'GCT',  # Alanine
-#     'C': 'TGT',  # Cysteine
-#     'D': 'GAT',  # Aspartic acid
-#     'E': 'GAA',  # Glutamic acid
-#     'F': 'TTT',  # Phenylalanine
-#     'G': 'GGA',  # Glycine
-#     'H': 'CAT',  # Histidine
-#     'I': 'ATT',  # Isoleucine
-#     'K': 'AAA',  # Lysine
-#     'L': 'CTT',  # Leucine
-#     'M': 'ATG',
-#     'N': 'AAT',  # Asparagine
-#     'P': 'CCT',  # Proline
-#     'Q': 'CAA',  # Glutamine
-#     'R': 'AGA',  # Arginine
-#     'S': 'TCT',  # Serine
-#     'T': 'ACT',  # Threonine
-#     'V': 'GTT',  # Valine
-#     'Y': 'TAT'   # Tyrosine
-    
-# }
-def optimize_dna_sequence(aa_sequence):
+from full_opti_dict import *
+def optimize_dna_sequence(aa_sequence,selected_host_organism):
 
-    codon_bias = {
-    'A': 'GCT',  # Alanine
-    'C': 'TGT',  # Cysteine
-    'D': 'GAT',  # Aspartic acid
-    'E': 'GAA',  # Glutamic acid
-    'F': 'TTT',  # Phenylalanine
-    'G': 'GGA',  # Glycine
-    'H': 'CAT',  # Histidine
-    'I': 'ATT',  # Isoleucine
-    'K': 'AAA',  # Lysine
-    'L': 'CTT',  # Leucine
-    'M': 'ATG',
-    'N': 'AAT',  # Asparagine
-    'P': 'CCT',  # Proline
-    'Q': 'CAA',  # Glutamine
-    'R': 'AGA',  # Arginine
-    'S': 'TCT',  # Serine
-    'T': 'ACT',  # Threonine
-    'V': 'GTT',  # Valine
-    'Y': 'TAT'   # Tyrosine
-    
-    }   
+    if selected_host_organism =='Cicer arientum'or selected_host_organism=='Lathyrus sativus' or selected_host_organism=='Vigna mungo':
+        codon_bias=codon_bias_cvml
+    if selected_host_organism == 'Cajanus cajan' or selected_host_organism=='Phaseolus vulgaris' or selected_host_organism=='Vigna radiata'or selected_host_organism == 'Glycine max' :
+        codon_bias=codon_bias_cgpv
+    if selected_host_organism == 'Pisum sativum' or selected_host_organism=='lens culinaris':
+        codon_bias=codon_bias_pslc
+
+
     # Initialize an empty string to store the optimized DNA sequence
     dna_sequence = ''
     opti_seq=''

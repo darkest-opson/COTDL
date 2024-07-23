@@ -32,8 +32,7 @@ def main():
     choice = st.sidebar.selectbox("Menu", menu)
 
     if choice == "Home":
-        st.markdown("""
-       Welcome to CODTL, the Legume DNA Optimization Tool. This application enables users to optimize DNA sequences for high protein expression and transformation experiments in legumes. Upload DNA or amino acid sequences and apply codon bias optimization techniques for enhanced gene expression in legumes. Ideal for researchers, biologists, and genetic engineers, CODTL offers the essential tools for designing legume-specific DNA sequences.""")
+        st.markdown("""Welcome to Legume DNA Optimization tool- CODTL (codon optimization and deoptimization tool for legume), an application designed to help you is a free online tool for performing codon optimization to improve gene expression, you can upload your DNA sequences or Amino Acid sequence and apply codon bias optimization techniques to enhance gene expression specifically in legumes. Whether you're a researcher, biologist, or genetic engineer, this app provides you with the tools you need to design DNA sequences tailored to legumes.""")
         st.image("main.png", use_column_width=True)
 
 
@@ -75,7 +74,7 @@ def main():
                             st.write("Error: DNA sequence length must be a multiple of 3")
                         else:
                             st.write("This might take few minutes.Please be patient.")
-                            modify_seq,modify_seq_ori=optimize_codons(input_dna_seq)
+                            modify_seq,modify_seq_ori=optimize_codons(input_dna_seq,selected_host_organism)
                             st.markdown(f"Optimized sequence: {modify_seq}", unsafe_allow_html=True)
 
                             melting_temp = calculate_melting_temp(modify_seq)
@@ -225,7 +224,7 @@ def main():
                 if Get_output=="Full Optimization":
                     flag = True
                     st.write("This might take few minutes.Please be patient.")
-                    modify_seq_aa,modify_seq_ori_aa=optimize_dna_sequence(input_aa_seq)
+                    modify_seq_aa,modify_seq_ori_aa=optimize_dna_sequence(input_aa_seq,selected_host_organism)
                     st.markdown(f"Optimized sequence: {modify_seq_aa}", unsafe_allow_html=True)
                     melting_temp = calculate_melting_temp(modify_seq_aa)
                     gc_content = calculate_gc_content(modify_seq_aa)

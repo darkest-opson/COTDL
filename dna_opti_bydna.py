@@ -1,32 +1,12 @@
 from colorama import Fore, Style
 import streamlit as st
+from full_opti_dict import *
 
 def is_dna_sequence(sequence):
         valid_nucleotides = {'A', 'T', 'G', 'C'}
         return all(nucleotide in valid_nucleotides for nucleotide in sequence)
 
-def optimize_codons(dna_seq):
-    codon_bias = {
-    'A': 'GCT',  # Alanine
-    'C': 'TGT',  # Cysteine
-    'D': 'GAT',  # Aspartic acid
-    'E': 'GAA',  # Glutamic acid
-    'F': 'TTT',  # Phenylalanine
-    'G': 'GGA',  # Glycine
-    'H': 'CAT',  # Histidine
-    'I': 'ATT',  # Isoleucine
-    'K': 'AAA',  # Lysine
-    'L': 'CTT',  # Leucine
-    'M': 'ATG',
-    'N': 'AAT',  # Asparagine
-    'P': 'CCT',  # Proline
-    'Q': 'CAA',  # Glutamine
-    'R': 'AGA',  # Arginine
-    'S': 'TCT',  # Serine
-    'T': 'ACT',  # Threonine
-    'V': 'GTT',  # Valine
-    'Y': 'TAT'   # Tyrosine
-    }
+def optimize_codons(dna_seq, selected_host_organism):
     codon_table = {
         'TTT': 'F', 'TTC': 'F', 'TTA': 'L', 'TTG': 'L',
         'CTT': 'L', 'CTC': 'L', 'CTA': 'L', 'CTG': 'L',
@@ -45,14 +25,21 @@ def optimize_codons(dna_seq):
         'AGT': 'S', 'AGC': 'S', 'AGA': 'R', 'AGG': 'R',
         'GGT': 'G', 'GGC': 'G', 'GGA': 'G', 'GGG': 'G'
     }
-    
+
+    if selected_host_organism =='Cicer arientum'or selected_host_organism=='Lathyrus sativus' or selected_host_organism=='Vigna mungo':
+        codon_bias=codon_bias_cvml
+    if selected_host_organism == 'Cajanus cajan' or selected_host_organism=='Phaseolus vulgaris' or selected_host_organism=='Vigna radiata'or selected_host_organism == 'Glycine max' :
+        codon_bias=codon_bias_cgpv
+    if selected_host_organism == 'Pisum sativum' or selected_host_organism=='lens culinaris':
+        codon_bias=codon_bias_pslc
+
     optimized_seq = ''
-    optimized_seq_ori=''
+    optimized_seq_ori = ''
 
     # Divide the DNA sequence into codons and replace each codon with the preferred codon
     for i in range(0, len(dna_seq), 3):
         if not is_dna_sequence(dna_seq):
-            st.write("Input sequence is NOT a valid DNA sequence")
+            print("Input sequence is NOT a valid DNA sequence")
             return None
         codon = dna_seq[i:i+3]
         if len(codon) == 3:
@@ -68,7 +55,8 @@ def optimize_codons(dna_seq):
             else:
                 optimized_seq += codon
                 optimized_seq_ori += codon
-    return optimized_seq,optimized_seq_ori
+
+    return optimized_seq, optimized_seq_ori
 
 # # Example usage:
 # dna_sequence = input("Please enter the DNA sequence: ")
