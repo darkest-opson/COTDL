@@ -41,7 +41,10 @@ def main():
         st.subheader("Get optimized DNA sequence.")
 
         if st.checkbox("By DNA sequence"):
-            seq_file=st.file_uploader("Upload FASTA File",type=["fasta","fa","txt"])
+            try:
+                seq_file=st.file_uploader("Upload FASTA File",type=["fasta","fa","txt"])
+            except:
+                st.write("Invalid Input sequence")
 
             if seq_file is not None:
                 # Convert the uploaded file object to a string buffer
@@ -199,8 +202,10 @@ def main():
 
         elif st.checkbox("By protein sequence"):
             flag = False
-            seq_file=st.file_uploader("Upload FASTA File",type=["fasta","fa","txt"])
-
+            try:
+                seq_file=st.file_uploader("Upload FASTA File",type=["fasta","fa","txt"])
+            except:
+                st.write("Invalid input sequence")
             if seq_file is not None:
                     # Convert the uploaded file object to a string buffer
                     # print("Before reading the sequence file")  # Print statement added
@@ -351,8 +356,10 @@ def main():
             details_1 = st.radio(" ",("By DNA sequence", "By amino acid sequence"), index=None)
             if details_1 == "By DNA sequence":
                 st.subheader("Get deoptimize DNA sequence by input DNA sequence.")
-                seq_file = st.file_uploader("Upload FASTA File", type=["fasta", "fa", "txt"])
-
+                try:
+                    seq_file = st.file_uploader("Upload FASTA File", type=["fasta", "fa", "txt"])
+                except:
+                    st.write("Invalid input sequence")
                 if seq_file is not None:
                     # Convert the uploaded file object to a string buffer
                     # print("Before reading the sequence file")  # Print statement added
@@ -436,8 +443,10 @@ def main():
 
             elif details_1 == "By amino acid sequence":
                 st.subheader("Get deoptimize DNA sequence by input Amino acid sequence.")
-                seq_file = st.file_uploader("Upload FASTA File", type=["fasta", "fa", "txt"])
-
+                try:
+                    seq_file = st.file_uploader("Upload FASTA File", type=["fasta", "fa", "txt"])
+                except:
+                    st.write("Invalid input sequence")
                 if seq_file is not None:
                 # Convert the uploaded file object to a string buffer
                 # print("Before reading the sequence file")  # Print statement added
