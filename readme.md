@@ -6,7 +6,7 @@ Welcome to Legume DNA Optimization tool- CODTL (codon optimization and deoptimiz
 
   - Download *COTDL* by 
   ```sh
-  git clone https://github.com/darkest-opson/legume.git
+  git clone https://github.com/darkest-opson/COTDL.git
   ```
 or
 Download *COTDL* by : click on download zip option
